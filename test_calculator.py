@@ -1,10 +1,16 @@
 import calculator
+import pytest
 
 
 class TestCalculator:
 
-    def test_addition(self):
-        assert 4 == calculator.add(2, 2)
+    @pytest.mark.parametrize("test_input_1, test_input_2, expected", [
+        (3, 5, 8),
+        (-10, 10, 0),
+        (2, 2, 4)
+    ])
+    def test_addition(self, test_input_1, test_input_2, expected):
+        assert calculator.add(test_input_1, test_input_2) == expected
 
     def test_subtraction(self):
         assert 2 == calculator.subtract(4, 2)
