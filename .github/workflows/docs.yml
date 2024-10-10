@@ -24,12 +24,14 @@ jobs:
       - name: Move files to docs folder
         run: |
           mv docs/sample-ci/*.html docs/
-          # Optionally, remove the original directory if it's no longer needed
-          cd docs
-          rmdir sample-ci || true
+          pwd
+          ls -la
+          ls -ltrh docs/
       - name: Deploy documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: docs # The folder the action should deploy.
+          clean: true # Clean the folder before deploying.
+          clean_exclude: CNAME
           force_orphan: true # Overwrite previous commits in gh-pages branch.
