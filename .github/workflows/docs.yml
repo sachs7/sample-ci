@@ -20,7 +20,12 @@ jobs:
           pip install -r requirements.txt
       - name: Generate documentation
         run: |
-          pdoc --html --output-dir=docs .
+          pdoc --html --force --output-dir=docs .
+      - name: Move files to docs folder
+        run: |
+          mv docs/sample-ci/*.html docs/
+          # Optionally, remove the original directory if it's no longer needed
+          rmdir docs/sample-ci || true
       - name: Deploy documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
