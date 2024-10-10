@@ -21,9 +21,9 @@ jobs:
       - name: Generate documentation
         run: |
           pdoc --html --force --output-dir=docs .
-      - name: Move files to docs folder
+      - name: Copy files to docs folder
         run: |
-          mv docs/sample-ci/*.html docs/
+          cp docs/sample-ci/*.html docs/
           pwd
           ls -la
           ls -ltrh docs/
@@ -33,4 +33,3 @@ jobs:
           branch: gh-pages # The branch the action should deploy to.
           folder: docs # The folder the action should deploy.
           clean: true # Clean the folder before deploying.
-          clean_exclude: CNAME
