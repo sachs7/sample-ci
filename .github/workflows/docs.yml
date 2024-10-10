@@ -25,7 +25,8 @@ jobs:
         run: |
           mv docs/sample-ci/*.html docs/
           # Optionally, remove the original directory if it's no longer needed
-          rmdir docs/sample-ci || true
+          cd docs
+          rmdir sample-ci || true
       - name: Deploy documentation to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
