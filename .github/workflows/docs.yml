@@ -34,4 +34,3 @@ jobs:
           folder: docs # The folder the action should deploy.
           clean: true # Clean the folder before deploying.
           clean_exclude: CNAME
-          force_orphan: true # Overwrite previous commits in gh-pages branch.
