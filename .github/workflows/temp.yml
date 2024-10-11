@@ -75,7 +75,7 @@ jobs:
         run: git remote -v
 
       - name: List docs directory
-        run: ls -la docs  # Check for 'docs' directory after download
+        run: ls -la sample-ci  # Check for 'docs' directory after download
 
       - name: Ensure gh-pages branch is clean
         run: |
