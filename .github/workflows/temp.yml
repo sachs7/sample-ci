@@ -98,7 +98,7 @@ jobs:
 
       - name: Copy docs to gh-pages branch
         run: |
-          cp -r docs/* .  # Copy the generated docs to the root of the gh-pages branch
+          cp -r sample-ci/* .  # Copy the generated docs to the root of the gh-pages branch
           git add -A
           git commit -m "Update documentation" || echo "No changes to commit"
           git push origin gh-pages  # Push changes to the gh-pages branch
