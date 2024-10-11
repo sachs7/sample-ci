@@ -40,20 +40,27 @@ jobs:
 
       - name: Upload documentation as artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          name: docs
-          path: docs
+          # name: docs
+          # path: docs
+          path: build_outputs_folder/
 
   deploy:
-    runs-on: ubuntu-latest
-    needs: build  # Ensures this job runs after the 'build' job
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      runs-on: ubuntu-latest
+      needs: build  # Ensures this job runs after the 'build' job
   
-    permissions:
-      pages: write  # Allow writing to the Pages branch
-      id-token: write  # Required to authenticate the job
+      # permissions:
+      #   pages: write  # Allow writing to the Pages branch
+      #   id-token: write  # Required to authenticate the job
   
-    steps:
+      steps:
+        - name: Deploy to GitHub Pages
+          id: deployment
+          uses: actions/deploy-pages@v4
       # - name: Download documentation artifact
       #   uses: actions/download-artifact@v3
       #   with:
@@ -87,10 +94,6 @@ jobs:
       #   run: |
       #     git add -A
       #     git commit -m "Update documentation" || echo "No changes to commit"
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
   
       # - name: Deploy to GitHub Pages
       #   run: |
