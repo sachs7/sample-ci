@@ -47,59 +47,46 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build  # Ensures this job runs after the 'build' job
-
+  
     permissions:
       pages: write  # Allow writing to the Pages branch
       id-token: write  # Required to authenticate the job
-
+  
     steps:
       - name: Download documentation artifact
         uses: actions/download-artifact@v3
         with:
           name: docs
-
+  
       - name: List files after downloading artifact
         run: ls -la  # Check current directory for downloaded files
-
+  
       - name: Checkout gh-pages branch
         uses: actions/checkout@v4
         with:
           ref: gh-pages  # Check out the gh-pages branch
-
+  
       - name: Set up Git
         run: |
           git config user.email "up.sachi@gmail.com"
           git config user.name "sachs7"
-
+          git remote set-url origin https://x-access-token:${{ secrets.SACHIN_TOKEN }}@github.com/${{ github.repository }}
+  
       - name: Verify remote URL
         run: git remote -v
-
-      - name: List docs directory
-        run: ls -la sample-ci  # Check for 'docs' directory after download
-
+  
+      - name: List docs directory before copying
+        run: ls -la sample-ci  # Check if the docs directory has files
+  
+      - name: Copy docs to gh-pages branch
+        run: |
+          cp -r sample-ci/* .  # Copy the generated docs to the root of the gh-pages branch
+  
       - name: Ensure gh-pages branch is clean
         run: |
           git add -A
-          git commit -m "Deploying to gh-pages" || echo "No changes to commit"
-
+          git commit -m "Update documentation" || echo "No changes to commit"
+  
       - name: Deploy to GitHub Pages
         run: |
-          if ! git show-ref --quiet refs/heads/gh-pages; then
-            # Create the gh-pages branch if it doesn't exist
-            git checkout --orphan gh-pages
-            git reset --hard
-            git commit --allow-empty -m "Initial commit on gh-pages"
-            git push origin gh-pages --force  # Force push for orphan branch
-          else
-            # Switch to gh-pages branch
-            git checkout gh-pages
-            git pull origin gh-pages --rebase || { echo "Rebase conflict occurred"; exit 1; }  # Handle rebase conflicts
-          fi
-
-      - name: Copy docs to gh-pages branch
-        run: |
-          token: ${{ secrets.SACHIN_TOKEN }}  # Ensure this token has repo access
-          cp -r sample-ci/* .  # Copy the generated docs to the root of the gh-pages branch
-          git add -A
-          git commit -m "Update documentation" || echo "No changes to commit"
           git push origin gh-pages  # Push changes to the gh-pages branch
