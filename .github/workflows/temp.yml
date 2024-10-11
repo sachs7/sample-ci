@@ -54,39 +54,39 @@ jobs:
       id-token: write  # Required to authenticate the job
   
     steps:
-      - name: Download documentation artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: docs
+      # - name: Download documentation artifact
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: docs
   
-      - name: List files after downloading artifact
-        run: ls -la  # Check current directory for downloaded files
+      # - name: List files after downloading artifact
+      #   run: ls -la  # Check current directory for downloaded files
   
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages  # Check out the gh-pages branch
+      # - name: Checkout gh-pages branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: gh-pages  # Check out the gh-pages branch
   
-      - name: Set up Git
-        run: |
-          git config user.email "up.sachi@gmail.com"
-          git config user.name "sachs7"
-          git remote set-url origin https://x-access-token:${{ secrets.SACHS7 }}@github.com/${{ github.repository }}
+      # - name: Set up Git
+      #   run: |
+      #     git config user.email "up.sachi@gmail.com"
+      #     git config user.name "sachs7"
+      #     git remote set-url origin https://x-access-token:${{ secrets.SACHS7 }}@github.com/${{ github.repository }}
   
-      - name: Verify remote URL
-        run: git remote -v
+      # - name: Verify remote URL
+      #   run: git remote -v
   
-      - name: List docs directory before copying
-        run: ls -la sample-ci  # Check if the docs directory has files
+      # - name: List docs directory before copying
+      #   run: ls -la sample-ci  # Check if the docs directory has files
   
-      - name: Copy docs to gh-pages branch
-        run: |
-          cp -r sample-ci/* .  # Copy the generated docs to the root of the gh-pages branch
+      # - name: Copy docs to gh-pages branch
+      #   run: |
+      #     cp -r sample-ci/* .  # Copy the generated docs to the root of the gh-pages branch
   
-      - name: Ensure gh-pages branch is clean
-        run: |
-          git add -A
-          git commit -m "Update documentation" || echo "No changes to commit"
+      # - name: Ensure gh-pages branch is clean
+      #   run: |
+      #     git add -A
+      #     git commit -m "Update documentation" || echo "No changes to commit"
 
       - name: Deploy to GitHub Pages
         id: deployment
