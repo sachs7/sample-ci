@@ -39,7 +39,8 @@ jobs:
         run: ls -la  # Check if 'docs' directory exists
 
       - name: Upload documentation as artifact
-        uses: actions/upload-artifact@v3
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
           name: docs
           path: docs
@@ -86,7 +87,11 @@ jobs:
         run: |
           git add -A
           git commit -m "Update documentation" || echo "No changes to commit"
-  
+
       - name: Deploy to GitHub Pages
-        run: |
-          git push origin gh-pages  # Push changes to the gh-pages branch
+        id: deployment
+        uses: actions/deploy-pages@v4
+  
+      # - name: Deploy to GitHub Pages
+      #   run: |
+      #     git push origin gh-pages  # Push changes to the gh-pages branch
