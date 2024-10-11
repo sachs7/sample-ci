@@ -70,7 +70,7 @@ jobs:
         run: |
           git config user.email "up.sachi@gmail.com"
           git config user.name "sachs7"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git remote set-url origin https://x-access-token:${{ secrets.SACHS7 }}@github.com/${{ github.repository }}
   
       - name: Verify remote URL
         run: git remote -v
