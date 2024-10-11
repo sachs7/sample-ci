@@ -22,14 +22,14 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements_freeze.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements_freeze.txt
+          pip install -r requirements.txt
 
       - name: Generate documentation
         run: |
@@ -100,4 +100,5 @@ jobs:
         run: |
           cp -r docs/* .  # Copy the generated docs to the root of the gh-pages branch
           git add -A
-          git
+          git commit -m "Update documentation" || echo "No changes to commit"
+          git push origin gh-pages  # Push changes to the gh-pages branch
