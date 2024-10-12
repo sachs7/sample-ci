@@ -53,26 +53,3 @@ jobs:
       - name: List the contents
         run: |
           ls -ltrh
-
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: build  # Ensure this job runs after the 'build' job
-
-  #   permissions:
-  #     pages: write  # Allow writing to the Pages branch
-  #     id-token: write  # Required to authenticate the job
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4  # Check out the code
-
-  #     - name: List the contents
-  #       run: |
-  #         ls -ltrh
-
-  #     - name: Deploy to GitHub Pages
-  #       uses: peaceiris/actions-gh-pages@v4
-  #       with:
-  #         github_token: ${{ secrets.SACHS7 }}  # Ensure this token has repo access
-  #         publish_dir: ./docs  # Directory containing generated HTML documentation
-  #         publish_branch: gh-pages  # Branch to deploy the documentation
