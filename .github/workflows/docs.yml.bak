@@ -37,39 +37,3 @@ jobs:
           branch: gh-pages
           folder: docs
           clean: true
-
-# name: Generate and Deploy Documentation
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - name: Set up Python
-#         uses: actions/setup-python@v2
-#         with:
-#           python-version: 3.12
-#       - name: Install dependencies
-#         run: |
-#           python -m pip install --upgrade pip
-#           pip install -r requirements.txt
-#       - name: Generate documentation
-#         run: |
-#           pdoc --html --force --output-dir=docs .
-#       - name: Copy files to docs folder
-#         run: |
-#           cp docs/sample-ci/*.html docs/
-#           pwd
-#           ls -la
-#           ls -ltrh docs/
-#       - name: Deploy documentation to GitHub Pages
-#         uses: JamesIves/github-pages-deploy-action@4.1.4
-#         with:
-#           branch: gh-pages # The branch the action should deploy to.
-#           folder: docs # The folder the action should deploy.
-#           clean: true # Clean the folder before deploying.
