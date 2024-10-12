@@ -31,13 +31,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Generate documentation
-        run: |
-          pdoc --html --force --output-dir=docs .  # Generate HTML documentation in the 'docs' folder
+      # - name: Generate documentation
+      #   run: |
+      #     pdoc --html --force --output-dir=docs .  # Generate HTML documentation in the 'docs' folder
 
-      - name: List the contents
-        run: |
-          ls -ltrh
+      # - name: List the contents
+      #   run: |
+      #     ls -ltrh
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,6 +50,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4  # Check out the code
+
+      - name: List the contents
+        run: |
+          ls -ltrh
+
+      - name: Generate documentation
+        run: |
+          pdoc --html --force --output-dir=docs .  # Generate HTML documentation in the 'docs' folder
 
       - name: List the contents
         run: |
