@@ -47,8 +47,12 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.SACHS7 }}  # Ensure this token has repo access
-          publish_dir: ./docs  # Directory containing generated HTML documentation
+          publish_dir: .  # Directory containing generated HTML documentation
           publish_branch: gh-pages  # Branch to deploy the documentation
+    
+      - name: List the contents
+        run: |
+          ls -ltrh
 
   # deploy:
   #   runs-on: ubuntu-latest
