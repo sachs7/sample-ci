@@ -43,13 +43,6 @@ jobs:
         run: |
           ls -ltrh
 
-      - name: Checkout code
-        uses: actions/checkout@v4  # Check out the code
-
-      - name: List the contents
-        run: |
-          ls -ltrh
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
