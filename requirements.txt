@@ -1,0 +1,15 @@
+atomicwrites
+attrs
+coverage
+entrypoints
+flake8
+mccabe
+more-itertools
+pluggy
+py
+pycodestyle
+pyflakes
+pytest
+pytest-cov
+six
+pdoc3
